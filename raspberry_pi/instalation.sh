@@ -2,7 +2,7 @@
 
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo apt-get install -y python3 python3-dev python3-venv python3-pip libffi-dev libssl-dev libjpeg-dev zlib1g-dev autoconf build-essential libopenjp2-7 libtiff5 tzdata libcurl4-openssl-dev
+sudo apt-get install -y python3 python3-dev python3-venv python3-pip libffi-dev libssl-dev libjpeg-dev zlib1g-dev autoconf build-essential libopenjp2-7 libtiff5 tzdata libcurl4-openssl-dev subversion
 
 sudo useradd -rm homeassistant
 sudo mkdir /srv/homeassistant
@@ -89,7 +89,9 @@ sudo -u homeassistant -H -s bash -c "source bin/activate &&
 sudo -u homeassistant -H -s bash -c "cd /home/homeassistant/.homeassistant &&
                                      mkdir custom_components &&
                                      cd custom_components &&
-                                     git clone https://github.com/LoSk-p/robonomics_smart_home.git"
+                                     svn checkout https://github.com/airalab/homeassistant-robonomics-integration/trunk/custom_components/robonomics"
+                                     
+sudo systemctl restart home-assistant@homeassistant.service
 sudo systemctl restart home-assistant@homeassistant.service
 
 
