@@ -17,23 +17,11 @@ sudo -u homeassistant -H -s bash -c "source bin/activate &&
 				     pip install aiodiscover==1.4.11"
 
 sudo -u homeassistant -H -s bash -c "source bin/activate &&
-				     pip3 install homeassistant && 
+				     pip3 install homeassistant==2022.6.2 && 
         			     timeout 60s hass"
 			     
 
 echo "DONE WITH ha"
-
-sudo apt update -y && sudo apt install mosquitto mosquitto-clients -y
-
-sudo mosquitto_passwd -b -c /etc/mosquitto/passwd user pass
-
-echo "listener 1883
-allow_anonymous false
-password_file /etc/mosquitto/passwd" | sudo tee -a /etc/mosquitto/mosquitto.conf
-
-sudo systemctl restart mosquitto
-
-echo "DONE WITH mqtt"
 
 cd /home/$USER
 wget https://dist.ipfs.io/go-ipfs/v0.12.2/go-ipfs_v0.12.2_linux-arm64.tar.gz
@@ -59,6 +47,23 @@ sudo systemctl enable ipfs-daemon.service
 sudo systemctl start ipfs-daemon.service
 
 echo "DONE WITH IPFS"
+
+sudo curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt-get install -y nodejs git make g++ gcc
+
+node --version 
+npm --version
+
+sudo mkdir /opt/zigbee2mqtt
+sudo chown -R ${USER}: /opt/zigbee2mqtt
+
+git clone --depth 1 https://github.com/Koenkk/zigbee2mqtt.git /opt/zigbee2mqtt
+
+cd /opt/zigbee2mqtt
+npm ci
+
+
+echo "Done with Zigbee2MQTT"
 
 echo "[Unit]
 Description=Home Assistant
