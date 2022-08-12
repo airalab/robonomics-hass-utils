@@ -14,25 +14,27 @@ sudo -u homeassistant -H -s bash -c "source bin/activate &&
         pip3 install wheel"
         
 sudo -u homeassistant -H -s bash -c "source bin/activate &&
-				     pip install aiodiscover==1.4.11"
+				     pip install aiodiscover==1.4.11 &&
+				     pip3 install sqlalchemy &&
+				     pip3 install fnvhash"
 
 sudo -u homeassistant -H -s bash -c "source bin/activate &&
-				     pip3 install homeassistant==2022.6.2 && 
+				     pip3 install homeassistant==2022.8.2 && 
         			     timeout 60s hass"
 			     
 
 echo "DONE WITH ha"
 
 cd /home/$USER
-wget https://dist.ipfs.io/go-ipfs/v0.12.2/go-ipfs_v0.12.2_linux-arm64.tar.gz
-tar -xvzf go-ipfs_v0.12.2_linux-arm64.tar.gz
-rm go-ipfs_v0.12.2_linux-arm64.tar.gz
+wget https://dist.ipfs.io/go-ipfs/v0.14.0/go-ipfs_v0.14.0_linux-arm64.tar.gz
+tar -xvzf go-ipfs_v0.14.0_linux-arm64.tar.gz
+rm go-ipfs_v0.14.0_linux-arm64.tar.gz
 cd go-ipfs
 sudo bash install.sh
 ipfs init
 
 echo "[Unit]
-Description=IPTS Daemon Service
+Description=IPFS Daemon Service
 
 [Service]
 Type=simple
@@ -70,6 +72,8 @@ Description=Home Assistant
 After=network-online.target
 [Service]
 Type=simple
+Restart=on-failure
+
 User=%i
 WorkingDirectory=/srv/%i/
 ExecStart=/srv/homeassistant/bin/hass -c "/home/%i/.homeassistant"
@@ -89,7 +93,7 @@ cd /srv/homeassistant
 
 sudo -u homeassistant -H -s bash -c "source bin/activate &&
         pip3 install http3 &&
-        pip3 install robonomics-interface~=1.0"
+        pip3 install robonomics-interface~=1.1"
 
 sudo -u homeassistant -H -s bash -c "cd /home/homeassistant/.homeassistant &&
                                      mkdir custom_components &&
