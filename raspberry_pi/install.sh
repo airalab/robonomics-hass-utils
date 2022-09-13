@@ -92,8 +92,7 @@ echo "DONE WITH ha part 2"
 cd /srv/homeassistant
 
 sudo -u homeassistant -H -s bash -c "source bin/activate &&
-        pip3 install http3 &&
-        pip3 install robonomics-interface~=1.1"
+        pip3 install robonomics-interface~=1.3"
 
 sudo -u homeassistant -H -s bash -c "cd /home/homeassistant/.homeassistant &&
                                      mkdir custom_components &&
