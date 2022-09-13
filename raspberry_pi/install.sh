@@ -92,6 +92,7 @@ echo "DONE WITH ha part 2"
 cd /srv/homeassistant
 
 sudo -u homeassistant -H -s bash -c "source bin/activate &&
+        pip3 install py_ed25519_bindings==1.0.1 &&
         pip3 install robonomics-interface~=1.3"
 
 sudo -u homeassistant -H -s bash -c "cd /home/homeassistant/.homeassistant &&
