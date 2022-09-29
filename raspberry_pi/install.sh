@@ -107,3 +107,9 @@ sudo systemctl restart home-assistant@homeassistant.service
 sudo systemctl restart home-assistant@homeassistant.service
 
 
+echo "Clear garbage"
+cd /home/$USER
+rm -r go-ipfs/
+rm install.sh
+
+echo "Garbage collected"
