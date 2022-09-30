@@ -31,22 +31,25 @@ tar -xvzf go-ipfs_v0.14.0_linux-arm64.tar.gz
 rm go-ipfs_v0.14.0_linux-arm64.tar.gz
 cd go-ipfs
 sudo bash install.sh
+ipfs init
 
+cd /home/$USER
+sudo chmod a+x ipfs_check.sh
+sudo mv ipfs_check.sh /usr/local/bin/
 
-curl -O https://raw.githubusercontent.com/LoSk-p/robonomics-hass-utils/main/raspberry_pi/ipfs_check.sh
-sudo mv ipfs_check.sh /etc/systemd/system/
 
 echo "[Unit]
 Description=IPFS Daemon Service
 
 [Service]
 Type=simple
-ExecStartPre= /bin/bash -c "bash /etc/systemd/system/ipfs_check.sh"
+ExecStartPre=/usr/local/bin/ipfs_check.sh
 ExecStart=/usr/local/bin/ipfs daemon
-User=$USER
+User=ubuntu
 
 [Install]
 WantedBy=multi-user.target
+
 " | sudo tee /etc/systemd/system/ipfs-daemon.service
 
 sudo systemctl enable ipfs-daemon.service
