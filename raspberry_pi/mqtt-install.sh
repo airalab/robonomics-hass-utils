@@ -11,6 +11,6 @@ sudo mosquitto_passwd -b -c /etc/mosquitto/passwd $USERNAME $PASS
 
 echo "listener 1883
 allow_anonymous false
-password_file /etc/mosquitto/passwd" | sudo tee -a /etc/mosquitto/mosquitto.conf
+password_file /etc/mosquitto/passwd" | sudo tee /etc/mosquitto/conf.d/local.conf
 
 sudo systemctl restart mosquitto
