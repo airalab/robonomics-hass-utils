@@ -11,12 +11,10 @@ sudo chown homeassistant:homeassistant /srv/homeassistant
 cd /srv/homeassistant
 sudo -u homeassistant -H -s python3 -m venv .
 sudo -u homeassistant -H -s bash -c "source bin/activate &&
-        pip3 install wheel"
+        pip3 install wheel~=0.37"
         
 sudo -u homeassistant -H -s bash -c "source bin/activate &&
-				     pip install aiodiscover==1.4.11 &&
-				     pip3 install sqlalchemy &&
-				     pip3 install fnvhash"
+				     pip3 install sqlalchemy~=1.4 fnvhash~=0.1"
 
 sudo -u homeassistant -H -s bash -c "source bin/activate &&
 				     pip3 install homeassistant==2022.8.2 && 
@@ -71,7 +69,7 @@ npm --version
 sudo mkdir /opt/zigbee2mqtt
 sudo chown -R ${USER}: /opt/zigbee2mqtt
 
-git clone --depth 1 https://github.com/Koenkk/zigbee2mqtt.git /opt/zigbee2mqtt
+git clone --depth 1 --branch 1.28.0 https://github.com/Koenkk/zigbee2mqtt.git /opt/zigbee2mqtt
 
 cd /opt/zigbee2mqtt
 npm ci
