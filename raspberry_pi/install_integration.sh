@@ -4,14 +4,20 @@ cd /home/$USER
 
 arc=$(lscpu | grep Architecture: | awk '{print $2}')
 echo $arc
-if [ $arc = "x86_64" ]; then 
+if [ $arc = "x86_64" ]; then
     wget https://dist.ipfs.io/go-ipfs/v0.14.0/go-ipfs_v0.14.0_linux-amd64.tar.gz
-else
+    tar -xvzf go-ipfs_v0.14.0_linux-amd64.tar.gz
+    rm go-ipfs_v0.14.0_linux-amd64.tar.gz
+elif [ $arc = "aarch64" ]; then
     wget https://dist.ipfs.io/go-ipfs/v0.14.0/go-ipfs_v0.14.0_linux-arm64.tar.gz
+    tar -xvzf go-ipfs_v0.14.0_linux-arm64.tar.gz
+    rm go-ipfs_v0.14.0_linux-arm64.tar.gz
+else
+    wget https://dist.ipfs.io/go-ipfs/v0.14.0/go-ipfs_v0.14.0_linux-arm.tar.gz
+    tar -xvzf go-ipfs_v0.14.0_linux-arm.tar.gz
+    rm go-ipfs_v0.14.0_linux-arm.tar.gz
 fi
 
-tar -xvzf go-ipfs_v0.14.0_linux-arm64.tar.gz
-rm go-ipfs_v0.14.0_linux-arm64.tar.gz
 cd go-ipfs
 sudo bash install.sh
 ipfs init -p local-discovery
