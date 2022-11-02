@@ -23,7 +23,9 @@ sudo -u homeassistant -H -s bash -c "source bin/activate &&
 
 echo "DONE WITH ha"
 
-wget https://raw.githubusercontent.com/LoSk-p/robonomics-hass-utils/main/raspberry_pi/install_ipfs_arc_dependent.sh | bash
+wget https://raw.githubusercontent.com/LoSk-p/robonomics-hass-utils/main/raspberry_pi/install_ipfs_arc_dependent.sh
+bash install_ipfs_arc_dependent.sh
+rm install_ipfs_arc_dependent.sh
 
 sudo curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs git make g++ gcc
