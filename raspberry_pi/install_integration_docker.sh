@@ -4,7 +4,7 @@ wget https://raw.githubusercontent.com/LoSk-p/robonomics-hass-utils/main/raspber
 bash install_ipfs_arc_dependent.sh
 rm install_ipfs_arc_dependent.sh
 
-echo "
+sudo echo "
 
 apk add subversion
 cd /config
