@@ -1,11 +1,14 @@
 # Raspberry PI Utils
 
-This repository contains scripts for installation process on RPI.
+This repository contains scripts for convenient installation of HA and Robonomics integration on Raspberry Pi.
 
-Next two scripts for public usage:
+The following scripts are for public use:
 
- - `install.sh` - bash script for main installation process.
- - `mqtt-install.sh` - bash script for mqtt broker installation.
- - `install_integration.sh` - bash script for Robonomics integration installation on preinstalled Home Assistant Core.
+ - `complete_install.sh` is to be used on a clean Ubuntu with python3.10 to install Home Assistant, IPFS, MQTT broker and Robonomics integration.
+ - `install_integration_core.sh` - bash script to install IPFS and Robonomics integration into an existing Home Assistant Core.
+ - `install_integration_docker.sh` - bash script to install IPFS and Robonomics integration into an existing Home Assistant Docker.
+ - `install_ipfs_arc_dependent.sh` is used to install IPFS daemon and add it as a systemd service. Used in above-mentioned scripts.
+ - `mqtt-install.sh` - bash script to install MQTT broker installation.
 
-Other two scripts for technical usage. they need to create prebuild and ready-yo-use RPI image.
+
+Other two scripts are for technical use. They are needed to create prebuilt and ready-yo-use RPI image.
