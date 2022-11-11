@@ -36,7 +36,7 @@ ipfs bootstrap add /dns4/3.pubsub.aira.life/tcp/443/wss/ipfs/QmWZSKTEQQ985mnNzMq
 
 
 cd /home/$USER
-curl -O https://raw.githubusercontent.com/LoSk-p/robonomics-hass-utils/main/raspberry_pi/ipfs_check.sh
+curl -O https://raw.githubusercontent.com/airalab/robonomics-hass-utils/main/raspberry_pi/ipfs_check.sh
 sudo chmod a+x ipfs_check.sh
 sudo mv ipfs_check.sh /usr/local/bin/
 

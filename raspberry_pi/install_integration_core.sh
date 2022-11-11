@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-wget https://raw.githubusercontent.com/LoSk-p/robonomics-hass-utils/main/raspberry_pi/install_ipfs_arc_dependent.sh
+wget https://raw.githubusercontent.com/airalab/robonomics-hass-utils/main/raspberry_pi/install_ipfs_arc_dependent.sh
 bash install_ipfs_arc_dependent.sh
 rm install_ipfs_arc_dependent.sh
 
