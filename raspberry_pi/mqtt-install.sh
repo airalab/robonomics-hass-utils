@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa -y
 sudo apt update -y && sudo apt install mosquitto mosquitto-clients -y
 
 echo "Please enter your username and press Enter"
