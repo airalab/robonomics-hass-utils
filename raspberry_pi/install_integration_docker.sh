@@ -5,8 +5,6 @@ bash install_ipfs_arc_dependent.sh
 rm install_ipfs_arc_dependent.sh
 
 sudo echo "
-
-apk add subversion
 cd /config
 mkdir custom_components
 cd custom_components

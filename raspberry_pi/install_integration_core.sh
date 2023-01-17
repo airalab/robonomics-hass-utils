@@ -4,8 +4,6 @@ wget https://raw.githubusercontent.com/airalab/robonomics-hass-utils/main/raspbe
 bash install_ipfs_arc_dependent.sh
 rm install_ipfs_arc_dependent.sh
 
-sudo apt-get install -y subversion
-
 sudo -u homeassistant -H -s bash -c "cd /home/homeassistant/.homeassistant &&
                                      mkdir custom_components &&
                                      cd custom_components &&
