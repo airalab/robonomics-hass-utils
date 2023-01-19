@@ -3,10 +3,10 @@
 FILE=/home/$USER/.ipfs/check
 
 if [ -f "$FILE" ]; then
-    echo "IPFS initialed. Start IPFS daemon"
+    echo "IPFS initialized. Start IPFS daemon"
     exit 0
 else
-    echo "IPFS isn't initialed. Start initialing process"
+    echo "IPFS isn't initialized. Start initializing process"
 
     cd /home/$USER
     rm -rf .ipfs/
@@ -18,6 +18,15 @@ else
 
 
     touch "$FILE"
-    echo "IPFS initialed. Start IPFS daemon"
+    echo "IPFS initialized. Start IPFS daemon"
 
+    echo "initializing yggdrasil"
+
+    yggdrasil -genconf -json > ./ygg.conf
+    jq '.Peers = input' ygg.conf input.json > yggdrasil.conf
+    rm ygg.conf
+    sudo mv yggdrasil.conf /etc/yggdrasil/
+    sudo systemctl enable yggdrasil
+    sudo systemctl start yggdrasil
+    echo "initialized yggdrasil"
 fi
