@@ -23,11 +23,11 @@ else
     echo "initializing yggdrasil"
 
     yggdrasil -genconf -json > ./ygg.conf
+    curl -O https://raw.githubusercontent.com/airalab/robonomics-hass-utils/main/raspberry_pi/input.json
+
     jq '.Peers = input' ygg.conf input.json > yggdrasil.conf
-    rm ygg.conf
+
     chmod 664 yggdrasil.conf
     sudo mv yggdrasil.conf /etc/
-    sudo systemctl enable yggdrasil
-    sudo systemctl start yggdrasil
     echo "initialized yggdrasil"
 fi
