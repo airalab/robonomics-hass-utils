@@ -22,10 +22,11 @@ else
 
     echo "initializing yggdrasil"
 
+    sudo rm /etc/yggdrasil.conf
     yggdrasil -genconf -json > ./ygg.conf
     jq '.Peers = input' ygg.conf input.json > yggdrasil.conf
     rm ygg.conf
-    sudo mv yggdrasil.conf /etc/yggdrasil/
+    sudo mv yggdrasil.conf /etc/
     sudo systemctl enable yggdrasil
     sudo systemctl start yggdrasil
     echo "initialized yggdrasil"
