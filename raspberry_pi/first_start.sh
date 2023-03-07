@@ -28,5 +28,7 @@ else
 
     chmod 664 yggdrasil.conf
     sudo mv yggdrasil.conf /etc/
+    rm ygg.conf
+    rm input.json
     echo "initialized yggdrasil"
 fi
