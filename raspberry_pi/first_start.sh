@@ -32,3 +32,45 @@ else
     rm input.json
     echo "initialized yggdrasil"
 fi
+
+# create password for mqtt. Then  save it in home directory and provide this data to z2m configuration
+
+cd /home/$USER
+
+# mqtt
+
+PASSWD=$(openssl rand -hex 10)
+echo "mqtt user - connectivity
+mqtt password - $PASSWD" > mqtt.txt
+
+sudo mosquitto_passwd -b -c /etc/mosquitto/passwd connectivity $PASSWD
+sudo systemctl restart mosquitto
+
+#zigbee2mqtt
+
+echo "# Home Assistant integration (MQTT discovery)
+homeassistant: true
+
+# allow new devices to join
+permit_join: false
+
+# MQTT settings
+mqtt:
+  # MQTT base topic for zigbee2mqtt MQTT messages
+  base_topic: zigbee2mqtt
+  # MQTT server URL
+  server: 'mqtt://localhost'
+  # MQTT server authentication, uncomment if required:
+  user: connectivity
+  password: $PASSWD
+
+frontend:
+  # Optional, default 8080
+  port: 8099
+
+# Serial settings
+serial:
+  # Location of CC2531 USB sniffer
+  port: /dev/ttyUSB0 # /dev/ttyUSB0 for example
+
+" | sudo tee /opt/zigbee2mqtt/data/configuration.yaml
