@@ -107,3 +107,6 @@ echo "{
   }
 }
 " | sudo tee /home/homeassistant/.homeassistant/.storage/core.config_entries
+
+sudo systemctl enable home-assistant@homeassistant.service
+sudo systemctl start home-assistant@homeassistant.service
