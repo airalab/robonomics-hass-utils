@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILE=/home/$USER/.ipfs/check
+FILE=/home/ipfsdaemon/.ipfs/check
 
 if [ -f "$FILE" ]; then
     echo "IPFS initialized. Start IPFS daemon"
@@ -8,7 +8,7 @@ if [ -f "$FILE" ]; then
 else
     echo "IPFS isn't initialized. Start initializing process"
 
-    cd /home/$USER
+    cd /home/ipfsdaemon
     rm -rf .ipfs/
     ipfs init -p local-discovery
     ipfs bootstrap add /dns4/1.pubsub.aira.life/tcp/443/wss/ipfs/QmdfQmbmXt6sqjZyowxPUsmvBsgSGQjm4VXrV7WGy62dv8
@@ -22,6 +22,8 @@ else
 
     echo "initializing yggdrasil"
 
+    curl -O https://raw.githubusercontent.com/airalab/robonomics-hass-utils/main/raspberry_pi/input.json
+
     yggdrasil -genconf -json > ./ygg.conf
 
     jq '.Peers = input' ygg.conf input.json > yggdrasil.conf
@@ -33,14 +35,9 @@ else
     echo "initialized yggdrasil"
 
     # create password for mqtt. Then  save it in home directory and provide this data to z2m configuration
-
-    cd /home/$USER
-
     # mqtt
 
     PASSWD=$(openssl rand -hex 10)
-    echo "mqtt user - connectivity
-    mqtt password - $PASSWD" > mqtt.txt
 
     sudo mosquitto_passwd -b -c /etc/mosquitto/passwd connectivity $PASSWD
     sudo systemctl restart mosquitto
@@ -73,7 +70,7 @@ else
     # Serial settings
     serial:
       # Location of CC2531 USB sniffer
-      port: $Z2MPATH # /dev/ttyUSB0 for example
+      port: $Z2MPATH
 
     " | sudo tee /opt/zigbee2mqtt/data/configuration.yaml
 
