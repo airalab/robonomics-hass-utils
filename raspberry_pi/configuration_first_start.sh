@@ -1,25 +1,13 @@
 #!/bin/bash
 
-FILE=/home/ipfsdaemon/.ipfs/check
+FILE=/root/.check
 
 if [ -f "$FILE" ]; then
-    echo "IPFS initialized. Start IPFS daemon"
+    echo "All configuration files already set. Nothing to do"
     exit 0
 else
-    echo "IPFS isn't initialized. Start initializing process"
-
-    cd /home/ipfsdaemon
-    rm -rf .ipfs/
-    ipfs init -p local-discovery
-    ipfs bootstrap add /dns4/1.pubsub.aira.life/tcp/443/wss/ipfs/QmdfQmbmXt6sqjZyowxPUsmvBsgSGQjm4VXrV7WGy62dv8
-    ipfs bootstrap add /dns4/2.pubsub.aira.life/tcp/443/wss/ipfs/QmPTFt7GJ2MfDuVYwJJTULr6EnsQtGVp8ahYn9NSyoxmd9
-    ipfs bootstrap add /dns4/3.pubsub.aira.life/tcp/443/wss/ipfs/QmWZSKTEQQ985mnNzMqhGCrwQ1aTA6sxVsorsycQz9cQrw
-    ipfs bootstrap add /dns4/ipfs-gateway.multi-agent.io/tcp/4001/ipfs/12D3KooWAuRhU7tnQ3cVQxvvdEHZ4pnfwipMtDL3oxZuzk9wP649
-
-
-    touch "$FILE"
-    echo "IPFS initialized. Start IPFS daemon"
-
+    echo "Create configuration files"
+    cd /root
     echo "initializing yggdrasil"
 
     curl -O https://raw.githubusercontent.com/airalab/robonomics-hass-utils/main/raspberry_pi/input.json
@@ -29,7 +17,7 @@ else
     jq '.Peers = input' ygg.conf input.json > yggdrasil.conf
 
     chmod 664 yggdrasil.conf
-    sudo mv yggdrasil.conf /etc/
+    mv yggdrasil.conf /etc/
     rm ygg.conf
     rm input.json
     echo "initialized yggdrasil"
@@ -39,8 +27,8 @@ else
 
     PASSWD=$(openssl rand -hex 10)
 
-    sudo mosquitto_passwd -b -c /etc/mosquitto/passwd connectivity $PASSWD
-    sudo systemctl restart mosquitto
+    mosquitto_passwd -b -c /etc/mosquitto/passwd connectivity $PASSWD
+    systemctl restart mosquitto
 
     #zigbee2mqtt
 
@@ -72,7 +60,7 @@ else
       # Location of CC2531 USB sniffer
       port: $Z2MPATH
 
-    " | sudo tee /opt/zigbee2mqtt/data/configuration.yaml
+    " | tee /opt/zigbee2mqtt/data/configuration.yaml
 
     # mqtt integration
 
@@ -105,9 +93,10 @@ else
         ]
       }
     }
-    " | sudo tee /home/homeassistant/.homeassistant/.storage/core.config_entries
+    " | tee /home/homeassistant/.homeassistant/.storage/core.config_entries
 
-    sudo systemctl enable home-assistant@homeassistant.service
-    sudo systemctl start home-assistant@homeassistant.service
+    systemctl enable home-assistant@homeassistant.service
+    systemctl start home-assistant@homeassistant.service
 
+    touch "$FILE"
 fi
