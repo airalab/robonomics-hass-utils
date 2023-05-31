@@ -36,64 +36,64 @@ else
     Z2MPATH="/dev/serial/by-path/"$Z2MPATH
 
     echo "# Home Assistant integration (MQTT discovery)
-    homeassistant: true
+homeassistant: true
 
-    # allow new devices to join
-    permit_join: false
+# allow new devices to join
+permit_join: false
 
-    # MQTT settings
-    mqtt:
-      # MQTT base topic for zigbee2mqtt MQTT messages
-      base_topic: zigbee2mqtt
-      # MQTT server URL
-      server: 'mqtt://localhost'
-      # MQTT server authentication, uncomment if required:
-      user: connectivity
-      password: $PASSWD
+# MQTT settings
+mqtt:
+  # MQTT base topic for zigbee2mqtt MQTT messages
+  base_topic: zigbee2mqtt
+  # MQTT server URL
+  server: 'mqtt://localhost'
+  # MQTT server authentication, uncomment if required:
+  user: connectivity
+  password: $PASSWD
 
-    frontend:
-      # Optional, default 8080
-      port: 8099
+frontend:
+  # Optional, default 8080
+  port: 8099
 
-    # Serial settings
-    serial:
-      # Location of CC2531 USB sniffer
-      port: $Z2MPATH
+# Serial settings
+serial:
+  # Location of CC2531 USB sniffer
+  port: $Z2MPATH
 
     " | tee /opt/zigbee2mqtt/data/configuration.yaml
 
     # mqtt integration
 
     echo "{
-      \"version\": 1,
-      \"minor_version\": 1,
-      \"key\": \"core.config_entries\",
-      \"data\": {
-        \"entries\": [
-          {
-            \"entry_id\": \"92c28c246bb8163e5cc9e6dc5b5d8606\",
-            \"version\": 1,
-            \"domain\": \"mqtt\",
-            \"title\": \"localhost\",
-            \"data\": {
-              \"broker\": \"localhost\",
-              \"port\": 1883,
-              \"username\": \"connectivity\",
-              \"password\": \"$PASSWD\",
-              \"discovery\": true,
-              \"discovery_prefix\": \"homeassistant\"
-            },
-            \"options\": {},
-            \"pref_disable_new_entities\": false,
-            \"pref_disable_polling\": false,
-            \"source\": \"user\",
-            \"unique_id\": null,
-            \"disabled_by\": null
-          }
-        ]
+  \"version\": 1,
+  \"minor_version\": 1,
+  \"key\": \"core.config_entries\",
+  \"data\": {
+    \"entries\": [
+      {
+        \"entry_id\": \"92c28c246bb8163e5cc9e6dc5b5d8606\",
+        \"version\": 1,
+        \"domain\": \"mqtt\",
+        \"title\": \"localhost\",
+        \"data\": {
+          \"broker\": \"localhost\",
+          \"port\": 1883,
+          \"username\": \"connectivity\",
+          \"password\": \"$PASSWD\",
+          \"discovery\": true,
+          \"discovery_prefix\": \"homeassistant\"
+        },
+        \"options\": {},
+        \"pref_disable_new_entities\": false,
+        \"pref_disable_polling\": false,
+        \"source\": \"user\",
+        \"unique_id\": null,
+        \"disabled_by\": null
       }
-    }
-    " | tee /home/homeassistant/.homeassistant/.storage/core.config_entries
+    ]
+  }
+}
+" | tee /home/homeassistant/.homeassistant/.storage/core.config_entries
 
     systemctl enable home-assistant@homeassistant.service
     systemctl start home-assistant@homeassistant.service
