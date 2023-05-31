@@ -10,8 +10,6 @@ else
     cd /root
     echo "initializing yggdrasil"
 
-    curl -O https://raw.githubusercontent.com/airalab/robonomics-hass-utils/main/raspberry_pi/input.json
-
     yggdrasil -genconf -json > ./ygg.conf
 
     jq '.Peers = input' ygg.conf input.json > yggdrasil.conf
