@@ -93,9 +93,12 @@ serial:
 }
 " | tee /home/homeassistant/.homeassistant/.storage/core.config_entries
 
-    echo "stream:" >> /home/homeassistant/.homeassistant/configuration.yaml
     systemctl enable home-assistant@homeassistant.service
     systemctl start home-assistant@homeassistant.service
+
+    sleep 10
+    echo "stream:" >> /home/homeassistant/.homeassistant/configuration.yaml
+    systemctl restart home-assistant@homeassistant.service
 
     touch "$FILE"
 fi
