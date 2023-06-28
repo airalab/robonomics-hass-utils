@@ -98,6 +98,7 @@ serial:
 
     sleep 10
     echo "stream:" >> /home/homeassistant/.homeassistant/configuration.yaml
+    echo "ffmpeg:" >> /home/homeassistant/.homeassistant/configuration.yaml
     systemctl restart home-assistant@homeassistant.service
 
     touch "$FILE"
