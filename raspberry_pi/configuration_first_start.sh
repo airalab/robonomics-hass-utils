@@ -1,21 +1,20 @@
 #!/bin/bash
 
-FILE=/root/.check
+FILE=/first_boot
 
 if [ -f "$FILE" ]; then
     echo "All configuration files already set. Nothing to do"
     exit 0
 else
     echo "Create configuration files"
-    cd /root
+    cd
     echo "initializing yggdrasil"
 
     yggdrasil -genconf -json > ./ygg.conf
 
-    jq '.Peers = input' ygg.conf input.json > yggdrasil.conf
+    jq '.Peers = input' ygg.conf input.json > /etc/yggdrasil.conf
 
-    chmod 664 yggdrasil.conf
-    mv yggdrasil.conf /etc/
+    chmod 664 /etc/yggdrasil.conf
     rm ygg.conf
     rm input.json
     echo "initialized yggdrasil"
@@ -91,15 +90,16 @@ serial:
     ]
   }
 }
-" | tee /home/homeassistant/.homeassistant/.storage/core.config_entries
+" | tee /srv/homeassistant/.homeassistant/.storage/core.config_entries
 
-    systemctl enable home-assistant@homeassistant.service
-    systemctl start home-assistant@homeassistant.service
+    systemctl enable home-assistant.service
+    systemctl start home-assistant.service
 
     sleep 10
-    echo "stream:" >> /home/homeassistant/.homeassistant/configuration.yaml
-    echo "ffmpeg:" >> /home/homeassistant/.homeassistant/configuration.yaml
-    systemctl restart home-assistant@homeassistant.service
+    echo "stream:" >> /srv/homeassistant/.homeassistant/configuration.yaml
+    echo "ffmpeg:" >> /srv/homeassistant/.homeassistant/configuration.yaml
+    systemctl restart home-assistant.service
 
     touch "$FILE"
+    echo "Don't delete this file. This file was generated due first boot and is needed to property work of services" >> $FILE
 fi
