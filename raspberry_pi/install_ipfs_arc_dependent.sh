@@ -3,17 +3,17 @@
 arc=$(uname -m)
 echo $arc
 if [ $arc = "x86_64" ]; then
-    wget https://dist.ipfs.io/go-ipfs/v0.17.0/go-ipfs_v0.17.0_linux-amd64.tar.gz
-    tar -xvzf go-ipfs_v0.17.0_linux-amd64.tar.gz
-    rm go-ipfs_v0.17.0_linux-amd64.tar.gz
+    wget https://dist.ipfs.io/go-ipfs/v0.21.0/go-ipfs_v0.21.0_linux-amd64.tar.gz
+    tar -xvzf go-ipfs_v0.21.0_linux-amd64.tar.gz
+    rm go-ipfs_v0.21.0_linux-amd64.tar.gz
 elif [ $arc = "aarch64" ]; then
-    wget https://dist.ipfs.io/go-ipfs/v0.17.0/go-ipfs_v0.17.0_linux-arm64.tar.gz
-    tar -xvzf go-ipfs_v0.17.0_linux-arm64.tar.gz
-    rm go-ipfs_v0.17.0_linux-arm64.tar.gz
+    wget https://dist.ipfs.io/go-ipfs/v0.21.0/go-ipfs_v0.21.0_linux-arm64.tar.gz
+    tar -xvzf go-ipfs_v0.21.0_linux-arm64.tar.gz
+    rm go-ipfs_v0.21.0_linux-arm64.tar.gz
 else
-    wget https://dist.ipfs.io/go-ipfs/v0.17.0/go-ipfs_v0.17.0_linux-arm.tar.gz
-    tar -xvzf go-ipfs_v0.17.0_linux-arm.tar.gz
-    rm go-ipfs_v0.17.0_linux-arm.tar.gz
+    wget https://dist.ipfs.io/go-ipfs/v0.21.0/go-ipfs_v0.21.0_linux-arm.tar.gz
+    tar -xvzf go-ipfs_v0.21.0_linux-arm.tar.gz
+    rm go-ipfs_v0.21.0_linux-arm.tar.gz
 fi
 
 cd go-ipfs

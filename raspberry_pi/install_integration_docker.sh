@@ -8,10 +8,10 @@ sudo echo "
 cd /config
 mkdir custom_components
 cd custom_components
-wget https://github.com/airalab/homeassistant-robonomics-integration/archive/refs/tags/1.5.3.zip &&
-                                     unzip 1.5.3.zip &&
-                                     mv homeassistant-robonomics-integration-1.5.3/custom_components/robonomics . &&
-                                     rm -r homeassistant-robonomics-integration-1.5.3 &&
-                                     rm 1.5.3.zip" | docker exec -i homeassistant bash
+wget https://github.com/airalab/homeassistant-robonomics-integration/archive/refs/tags/1.6.1.zip &&
+                                     unzip 1.6.1.zip &&
+                                     mv homeassistant-robonomics-integration-1.6.1/custom_components/robonomics . &&
+                                     rm -r homeassistant-robonomics-integration-1.6.1 &&
+                                     rm 1.6.1.zip" | docker exec -i homeassistant bash
 
 echo "Integration downloaded!"
