@@ -6,8 +6,8 @@ bash install_ipfs_arc_dependent.sh
 rm install_ipfs_arc_dependent.sh
 
 sudo -u homeassistant -H -s bash -c "cd /home/homeassistant/.homeassistant &&
-                                     mkdir custom_components &&
-                                     cd custom_components &&
+                                     mkdir custom_components"
+sudo -u homeassistant -H -s bash -c "cd /home/homeassistant/.homeassistant/custom_components &&
                                      wget https://github.com/airalab/homeassistant-robonomics-integration/archive/refs/tags/1.6.1.zip &&
                                      unzip 1.6.1.zip &&
                                      mv homeassistant-robonomics-integration-1.6.1/custom_components/robonomics . &&
