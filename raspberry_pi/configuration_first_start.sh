@@ -12,9 +12,9 @@ else
 
     yggdrasil -genconf -json > ./ygg.conf
 
-    jq '.Peers = input' ygg.conf input.json > /etc/yggdrasil.conf
+    jq '.Peers = input' ygg.conf input.json > /etc/yggdrasil/yggdrasil.conf
 
-    chmod 664 /etc/yggdrasil.conf
+    chmod 664 /etc/yggdrasil/yggdrasil.conf
     rm ygg.conf
     rm input.json
     echo "initialized yggdrasil"
