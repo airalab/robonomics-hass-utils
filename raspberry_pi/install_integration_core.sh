@@ -17,6 +17,20 @@ else
     exit 1
 fi
 
+if [[ -f 001-test.sh ]]
+then
+  echo "IPFS setup file exists"
+else
+  wget https://raw.githubusercontent.com/tubleronchik/robonomics-hass-utils/main/raspberry_pi/001-test.sh
+fi
+
+if [[ -f core-compose.yaml ]]
+then
+  echo "Compose file exists"
+else
+  wget https://raw.githubusercontent.com/tubleronchik/robonomics-hass-utils/main/raspberry_pi/core_compose.yaml
+fi
+
 # create IPFS repositories
 if [[ -d ./ipfs/data ]]
 then
@@ -40,7 +54,7 @@ fi
 
 # return to the directory with compose
 cd $CURRENT_PATH
-docker compose up -d
+docker compose up -f core-compose.yaml -d
 
 
 echo "Integration downloaded!"
