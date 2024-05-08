@@ -24,7 +24,7 @@ else
   wget https://raw.githubusercontent.com/tubleronchik/robonomics-hass-utils/main/raspberry_pi/001-test.sh
 fi
 
-if [[ -f core-compose.yaml ]]
+if [[ -f core_compose.yaml ]]
 then
   echo "Compose file exists"
 else
@@ -54,7 +54,7 @@ fi
 
 # return to the directory with compose
 cd $CURRENT_PATH
-docker compose up -f core-compose.yaml -d
+docker compose -f core_compose.yaml up -d
 
 
 echo "Integration downloaded!"
