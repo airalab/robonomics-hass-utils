@@ -75,7 +75,7 @@ fi
 
 # return to the directory with compose
 cd $CURRENT_PATH
-docker compose -f core_compose.yaml up -d
+docker compose -f core_compose_with_ipfs.yaml up -d
 
 
 echo "Integration downloaded!"
