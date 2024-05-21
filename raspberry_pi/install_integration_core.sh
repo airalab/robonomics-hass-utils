@@ -20,7 +20,7 @@ fi
 # check if ipfs exists
 echo "Checking if IPFS installed... It may take few minutes. Please wait"
 IP_ADDR=$(hostname -I | awk '{print $1}')
-http_status=$(curl -o /dev/null -s -w "%{http_code}" http://$IP_ADDR:8080/ipfs/QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG/)
+http_status=$(curl -o /dev/null -s -w "%{http_code}" http://127.0.0.1:8080/ipfs/QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG/)
 
 if [[ $http_status -eq 200 ]]; 
 then
@@ -31,7 +31,7 @@ then
       1. '/dns4/1.pubsub.aira.life/tcp/443/wss/ipfs/QmdfQmbmXt6sqjZyowxPUsmvBsgSGQjm4VXrV7WGy62dv8'
       2. '/dns4/2.pubsub.aira.life/tcp/443/wss/ipfs/QmPTFt7GJ2MfDuVYwJJTULr6EnsQtGVp8ahYn9NSyoxmd9'
       3. '/dns4/3.pubsub.aira.life/tcp/443/wss/ipfs/QmWZSKTEQQ985mnNzMqhGCrwQ1aTA6sxVsorsycQz9cQrw'
-      Is your config set up properly? [yes/no]: " answer
+      Is your config set up properly? [yes/no] (No): " answer
       answer=${answer:-no}
 
   # Convert the user input to lowercase
@@ -76,6 +76,7 @@ fi
 # return to the directory with compose
 cd $CURRENT_PATH
 docker compose -f core_compose_with_ipfs.yaml up -d
+rm 001-test.sh
 
 
 echo "Integration downloaded!"
