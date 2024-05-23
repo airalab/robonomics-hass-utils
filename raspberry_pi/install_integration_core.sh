@@ -43,8 +43,8 @@ then
     exit 1
   else
     echo "Pulling libp2p-ws-proxy image and running the container..."
-    docker pull ghcr.io/pinoutltd/libp2p-ws-proxy:latest
-    docker run --name libp2p-proxy --detach -p 127.0.0.1:8888:8888 -p 127.0.0.1:9999:9999 ghcr.io/pinoutltd/libp2p-ws-proxy:latest
+    docker pull ghcr.io/pinoutltd/libp2p-ws-proxy:v.1.0.1
+    docker run --name libp2p-proxy --detach -p 127.0.0.1:8888:8888 -p 127.0.0.1:9999:9999 ghcr.io/pinoutltd/libp2p-ws-proxy:v.1.0.1
     exit 0
   fi
 fi
