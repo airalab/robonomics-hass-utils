@@ -31,7 +31,7 @@ then
       1. '/dns4/1.pubsub.aira.life/tcp/443/wss/ipfs/QmdfQmbmXt6sqjZyowxPUsmvBsgSGQjm4VXrV7WGy62dv8'
       2. '/dns4/2.pubsub.aira.life/tcp/443/wss/ipfs/QmPTFt7GJ2MfDuVYwJJTULr6EnsQtGVp8ahYn9NSyoxmd9'
       3. '/dns4/3.pubsub.aira.life/tcp/443/wss/ipfs/QmWZSKTEQQ985mnNzMqhGCrwQ1aTA6sxVsorsycQz9cQrw'
-      Is your config set up properly? [yes/no] (No): " answer
+      Is your config set up properly? [yes/No]: " answer
       answer=${answer:-no}
 
   # Convert the user input to lowercase
@@ -54,14 +54,14 @@ if [[ -f 001-test.sh ]]
 then
   echo "IPFS setup file exists"
 else
-  wget https://raw.githubusercontent.com/tubleronchik/robonomics-hass-utils/main/raspberry_pi/001-test.sh
+  wget https://raw.githubusercontent.com/airalab/robonomics-hass-utils/main/raspberry_pi/001-test.sh
 fi
 
 if [[ -f core_compose_with_ipfs.yaml ]]
 then
   echo "Compose file exists"
 else
-  wget https://raw.githubusercontent.com/tubleronchik/robonomics-hass-utils/main/raspberry_pi/core_compose_with_ipfs.yaml
+  wget https://raw.githubusercontent.com/airalab/robonomics-hass-utils/main/raspberry_pi/core_compose_with_ipfs.yaml
 fi
 
 # create IPFS repositories
@@ -78,5 +78,4 @@ cd $CURRENT_PATH
 docker compose -f core_compose_with_ipfs.yaml up -d
 rm 001-test.sh
 
-
-echo "Integration downloaded!"
+echo "All set up!"
